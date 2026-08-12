@@ -220,18 +220,30 @@ whatsappButton.addEventListener("click", (e) => {
     return;
   }
 
-  let message = "🌸 FLOWER HOUSE ORDER 🌸%0A%0A";
+const customerName = document.getElementById("customerName").value.trim();
+const customerPhone = document.getElementById("customerPhone").value.trim();
+const customerAddress = document.getElementById("customerAddress").value.trim();
 
-  cart.forEach((item, index) => {
-    message += `${index + 1}. ${item.name} - ${item.price}%0A`;
-  });
+if (!customerName || !customerPhone || !customerAddress) {
+  alert("ದಯವಿಟ್ಟು ಹೆಸರು, ಮೊಬೈಲ್ ನಂಬರ್ ಮತ್ತು ವಿಳಾಸ ಹಾಕಿ ❤️");
+  return;
+}
 
-  message += "%0A❤️ Thank you for ordering!";
+let message = `🌸 FLOWER HOUSE ORDER 🌸%0A%0A`;
+message += `👤 ಹೆಸರು: ${customerName}%0A`;
+message += `📱 ಮೊಬೈಲ್: ${customerPhone}%0A`;
+message += `📍 ವಿಳಾಸ: ${customerAddress}%0A%0A`;
 
-  window.open(
-    "https://wa.me/916362993413?text=" + message,
-    "_blank"
-  );
+cart.forEach((item, index) => {
+  message += `${index + 1}. ${item.name} - ${item.price}%0A`;
+});
+
+message += `%0A❤️ Thank you for ordering!`;
+
+window.open(
+  "https://wa.me/916362993413?text=" + message,
+  "_blank"
+);
 });
                   </script>     </a>   
 </body>
