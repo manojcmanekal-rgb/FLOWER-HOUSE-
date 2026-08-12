@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLOWER HOUSE - ಹೂವಿನ ಮನೆ</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fffafc;
+      color: #222;
+    }
+
+    header {
+      background: white;
+      padding: 18px;
+      text-align: center;
+      box-shadow: 0 2px 8px #ddd;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 26px;
+    }
+
+    header p {
+      margin: 5px 0 0;
+      font-size: 15px;
+    }
+
+    .search {
+      margin: 20px;
+    }
+
+    .search input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 16px;
+    }
+
+    h2 {
+      margin: 20px;
+    }
+
+    .categories {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      padding: 0 20px;
+    }
+
+    .category {
+      min-width: 90px;
+      background: white;
+      padding: 15px 10px;
+      text-align: center;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px #eee;
+    }
+
+    .flowers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      padding: 0 20px 30px;
+    }
+
+    .flower {
+      background: white;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: 0 2px 8px #eee;
+    }
+
+    .flower-image {
+      height: 120px;
+      background: #ffe5ef;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 55px;
+    }
+
+    .flower h3 {
+      margin-bottom: 5px;
+    }
+
+    .price {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    button {
+      width: 100%;
+      padding: 11px;
+      border: 0;
+      border-radius: 10px;
+      background: #111;
+      color: white;
+      font-size: 15px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>🌸 FLOWER HOUSE</h1>
+    <p>ಹೂವಿನ ಮನೆ</p>
+  </header>
+
+  <div class="search">
+    <input type="text" placeholder="🔍 ಹೂವು ಹುಡುಕಿ">
+  </div>
+
+  <h2>ವಿಭಾಗಗಳು</h2>
+
+  <div class="categories">
+    <div class="category">🌹<br>Roses</div>
+    <div class="category">💐<br>Bouquets</div>
+    <div class="category">🌼<br>Garlands</div>
+    <div class="category">🌸<br>Jasmine</div>
+  </div>
+
+  <h2>ಜನಪ್ರಿಯ ಹೂವುಗಳು</h2>
+
+  <div class="flowers">
+
+    <div class="flower">
+      <div class="flower-image">🌹</div>
+      <h3>Red Roses</h3>
+      <div class="price">₹199</div>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="flower">
+      <div class="flower-image">💐</div>
+      <h3>Beautiful Bouquet</h3>
+      <div class="price">₹399</div>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="flower">
+      <div class="flower-image">🌼</div>
+      <h3>Flower Garland</h3>
+      <div class="price">₹149</div>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="flower">
+      <div class="flower-image">🌸</div>
+      <h3>Jasmine</h3>
+      <div class="price">₹99</div>
+      <button>Add to Cart</button>
+    </div>
+
+  </div>
+
+</body>
+  </html>
