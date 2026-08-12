@@ -237,7 +237,7 @@ message += `📍 ವಿಳಾಸ: ${customerAddress}%0A%0A`;
 cart.forEach((item, index) => {
   message += `${index + 1}. ${item.name} - ${item.price}%0A`;
 });
-
+let total = cart.reduce((sum, item) => sum + parseInt(item.price.replace(/\D/g, "")), 0);
 message += `%0A❤️ Thank you for ordering!`;
 
 window.open(
