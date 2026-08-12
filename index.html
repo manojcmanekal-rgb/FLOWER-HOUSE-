@@ -242,7 +242,7 @@ let total = cart.reduce((sum, item) => sum + parseInt(item.price.replace(/\D/g, 
 message += `%0A❤️ Thank you for ordering!`;
 
 window.open(
-  "https://wa.me/916362993413?text=" + message,
+  "ht"https://wa.me/916362993413?text=" + encodeURIComponent(message),
   "_blank"
 );
 });
