@@ -211,7 +211,7 @@ document.querySelectorAll(".flower button").forEach((button) => {
   });
 });
 
-const whatsappButton = document.querySelector('a[href*="wa.me"]');
+const whatsappButton = document.querySelector('a[href^="https://wa.me/"]');
 
 whatsappButton.addEventListener("click", (e) => {
   e.preventDefault();
