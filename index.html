@@ -345,7 +345,56 @@ document.getElementById("orderButton").addEventListener("click", function(e) {
         "https://wa.me/916362993413?text=" +
         encodeURIComponent(message);
 });
-  
+ function setLanguage(lang) {
+    const text = {
+        kn: {
+            search: "🔍 ಹೂವು ಹುಡುಕಿ",
+            categories: "ವರ್ಗಗಳು",
+            flowers: "ಜನಪ್ರಿಯ ಹೂವುಗಳು",
+            roses: "ಗುಲಾಬಿಗಳು",
+            bouquets: "ಬೊಕೆಗಳು",
+            garlands: "ಹಾರಗಳು",
+            jasmine: "ಮಲ್ಲಿಗೆ",
+            add: "ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಿ"
+        },
+        en: {
+            search: "🔍 Search flowers",
+            categories: "Categories",
+            flowers: "Popular Flowers",
+            roses: "Roses",
+            bouquets: "Bouquets",
+            garlands: "Garlands",
+            jasmine: "Jasmine",
+            add: "Add to Cart"
+        },
+        hi: {
+            search: "🔍 फूल खोजें",
+            categories: "श्रेणियाँ",
+            flowers: "लोकप्रिय फूल",
+            roses: "गुलाब",
+            bouquets: "गुलदस्ते",
+            garlands: "मालाएँ",
+            jasmine: "चमेली",
+            add: "कार्ट में जोड़ें"
+        }
+    };
+
+    const t = text[lang];
+
+    document.querySelector(".search input").placeholder = t.search;
+    document.querySelectorAll("h2")[0].innerText = t.categories;
+    document.querySelectorAll("h2")[1].innerText = t.flowers;
+
+    const categories = document.querySelectorAll(".category");
+    categories[0].innerHTML = "🌹<br>" + t.roses;
+    categories[1].innerHTML = "💐<br>" + t.bouquets;
+    categories[2].innerHTML = "🌼<br>" + t.garlands;
+    categories[3].innerHTML = "🌸<br>" + t.jasmine;
+
+    document.querySelectorAll(".flower button").forEach(function(button) {
+        button.innerText = t.add;
+    });
+} 
 </script>
 </body>
 </html>
