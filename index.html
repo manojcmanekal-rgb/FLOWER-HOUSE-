@@ -195,6 +195,57 @@ let cart = [];
 
 document.querySelectorAll(".flower button").forEach(function(button) {
     button.addEventListener("click", function() {
+        const flower = button.closest(".flower");
+        const name = flower.querySelector("h3").innerText;
+        const price = flower.querySelector(".price").innerText;
+
+        cart.push({
+            name: name,
+            price: price
+        });
+
+        button.innerText = "Added ✓";
+        button.style.background = "#25D366";
+    });
+});
+
+document.getElementById("orderButton").addEventListener("click", function(e) {
+    e.preventDefault();
+
+    if (cart.length === 0) {
+        alert("ಮೊದಲು ಒಂದು Flower Add to Cart ಮಾಡಿ ❤️");
+        return;
+    }
+
+    const customerName = document.getElementById("customerName").value.trim();
+    const customerPhone = document.getElementById("customerPhone").value.trim();
+    const customerAddress = document.getElementById("customerAddress").value.trim();
+
+    if (!customerName || !customerPhone || !customerAddress) {
+        alert("ಹೆಸರು, ಮೊಬೈಲ್ ನಂಬರ್ ಮತ್ತು ವಿಳಾಸ ಹಾಕಿ ❤️");
+        return;
+    }
+
+    let message = "🌸 FLOWER HOUSE ORDER 🌸\n\n";
+    message += "👤 ಹೆಸರು: " + customerName + "\n";
+    message += "📱 ಮೊಬೈಲ್: " + customerPhone + "\n";
+    message += "📍 ವಿಳಾಸ: " + customerAddress + "\n\n";
+
+    cart.forEach(function(item, index) {
+        message += (index + 1) + ". " + item.name + " - " + item.price + "\n";
+    });
+
+    message += "\n❤️ Thank you for ordering!";
+
+    window.location.href =
+        "https://wa.me/916362993413?text=" +
+        encodeURIComponent(message);
+});
+</script>
+let cart = [];
+
+document.querySelectorAll(".flower button").forEach(function(button) {
+    button.addEventListener("click", function() {
 
         const flower = button.closest(".flower");
         const name = flower.querySelector("h3").innerText;
