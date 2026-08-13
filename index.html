@@ -444,7 +444,26 @@ function setLanguage(lang) {
         button.innerText = t.add;
     });
 } 
-      
+  function getLocation() {
+    if (!navigator.geolocation) {
+        alert("Location is not supported on this phone.");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            document.getElementById("customerAddress").value =
+                "📍 Location: https://www.google.com/maps?q=" +
+                lat + "," + lon;
+        },
+        function() {
+            alert("Please allow location permission.");
+        }
+    );
+}    
 </script>
   
 </body>
