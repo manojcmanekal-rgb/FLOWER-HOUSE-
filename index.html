@@ -256,6 +256,32 @@ cart.forEach(function(item) {
 
 document.getElementById("totalAmount").innerText =
     "Total Amount: ₹" + displayTotal;
+      function updateCartSummary() {
+    let summary = document.getElementById("cartSummary");
+
+    if (!summary) {
+        summary = document.createElement("div");
+        summary.id = "cartSummary";
+        summary.style = "padding:20px;margin:20px 0;background:#f5f5f5;border-radius:15px;";
+        document.getElementById("orderButton").parentNode.insertBefore(
+            summary,
+            document.getElementById("orderButton")
+        );
+    }
+
+    let html = "<h2>🛒 Cart Summary</h2>";
+
+    cart.forEach(function(item) {
+        html += "<p>" + item.name + " × " + item.quantity +
+                " = ₹" + (item.price * item.quantity) + "</p>";
+    });
+
+    html += "<h3>💰 Total: ₹" + displayTotal + "</h3>";
+
+    summary.innerHTML = html;
+}
+
+updateCartSummary();
         button.innerText = "Added ✓";
         button.style.background = "#25D366";
     });
