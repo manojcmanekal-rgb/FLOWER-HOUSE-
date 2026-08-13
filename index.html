@@ -345,19 +345,29 @@ document.getElementById("orderButton").addEventListener("click", function(e) {
         "https://wa.me/916362993413?text=" +
         encodeURIComponent(message);
 });
- function setLanguage(lang) {
+function setLanguage(lang) {
+
     const text = {
+
         kn: {
+            title: "🌸 FLOWER HOUSE",
+            subtitle: "ಹೂವಿನ ಮನೆ",
             search: "🔍 ಹೂವು ಹುಡುಕಿ",
-            categories: "ವರ್ಗಗಳು",
+            categories: "ವಿಭಾಗಗಳು",
             flowers: "ಜನಪ್ರಿಯ ಹೂವುಗಳು",
             roses: "ಗುಲಾಬಿಗಳು",
-            bouquets: "ಬೊಕೆಗಳು",
-            garlands: "ಹಾರಗಳು",
+            bouquets: "ಹೂಗುಚ್ಛಗಳು",
+            garlands: "ಹೂಮಾಲೆಗಳು",
             jasmine: "ಮಲ್ಲಿಗೆ",
+            redRoses: "ಕೆಂಪು ಗುಲಾಬಿಗಳು",
+            beautifulBouquet: "ಸುಂದರ ಹೂಗುಚ್ಛ",
+            flowerGarland: "ಹೂಮಾಲೆ",
             add: "ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಿ"
         },
+
         en: {
+            title: "🌸 FLOWER HOUSE",
+            subtitle: "Flower House",
             search: "🔍 Search flowers",
             categories: "Categories",
             flowers: "Popular Flowers",
@@ -365,9 +375,15 @@ document.getElementById("orderButton").addEventListener("click", function(e) {
             bouquets: "Bouquets",
             garlands: "Garlands",
             jasmine: "Jasmine",
+            redRoses: "Red Roses",
+            beautifulBouquet: "Beautiful Bouquet",
+            flowerGarland: "Flower Garland",
             add: "Add to Cart"
         },
+
         hi: {
+            title: "🌸 FLOWER HOUSE",
+            subtitle: "फूलों की दुकान",
             search: "🔍 फूल खोजें",
             categories: "श्रेणियाँ",
             flowers: "लोकप्रिय फूल",
@@ -375,25 +391,51 @@ document.getElementById("orderButton").addEventListener("click", function(e) {
             bouquets: "गुलदस्ते",
             garlands: "मालाएँ",
             jasmine: "चमेली",
+            redRoses: "लाल गुलाब",
+            beautifulBouquet: "सुंदर गुलदस्ता",
+            flowerGarland: "फूलों की माला",
             add: "कार्ट में जोड़ें"
         }
     };
 
     const t = text[lang];
 
+    document.querySelector("header h1").innerText = t.title;
+    document.querySelector("header p").innerText = t.subtitle;
+
     document.querySelector(".search input").placeholder = t.search;
+
     document.querySelectorAll("h2")[0].innerText = t.categories;
     document.querySelectorAll("h2")[1].innerText = t.flowers;
 
     const categories = document.querySelectorAll(".category");
+
     categories[0].innerHTML = "🌹<br>" + t.roses;
     categories[1].innerHTML = "💐<br>" + t.bouquets;
     categories[2].innerHTML = "🌼<br>" + t.garlands;
     categories[3].innerHTML = "🌸<br>" + t.jasmine;
 
+    const flowers = document.querySelectorAll(".flower h3");
+
+    flowers[0].innerText = t.redRoses;
+    flowers[1].innerText = t.beautifulBouquet;
+    flowers[2].innerText = t.flowerGarland;
+    flowers[3].innerText = t.jasmine;
+
+    flowers[4].innerText =
+        lang === "kn" ? "ದೇವಸ್ಥಾನದ ಹೂವು - 1 ಮಾಲೆ" :
+        lang === "hi" ? "मंदिर के फूल - 1 माला" :
+        "Temple Flowers - 1 Garland";
+
+    flowers[5].innerText =
+        lang === "kn" ? "ದೇವಸ್ಥಾನದ ಹೂವು - 2 ಮಾಲೆ" :
+        lang === "hi" ? "मंदिर के फूल - 2 माला" :
+        "Temple Flowers - 2 Garlands";
+
     document.querySelectorAll(".flower button").forEach(function(button) {
         button.innerText = t.add;
     });
+} 
 } 
 </script>
 </body>
