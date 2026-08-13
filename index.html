@@ -239,19 +239,26 @@ document.querySelectorAll(".flower").forEach(function(flower) {
 
         const qty = parseInt(quantity.innerText);
 
-        const existing = cart.find(function(item) {
-            return item.name === name;
-        });
+       const existingIndex = cart.findIndex(function(item) {
+    return item.name === name;
+});
 
-        if (existing) {
-            existing.quantity += qty;
-        } else {
-            cart.push({
-                name: name,
-                price: price,
-                quantity: qty
-            });
-        }
+if (existingIndex !== -1) {
+    cart.splice(existingIndex, 1);
+    button.innerText = "Add to Cart";
+    button.style.background = "#111";
+} else {
+    cart.push({
+        name: name,
+        price: price,
+        quantity: qty
+    });
+    button.innerText = "Remove from Cart";
+    button.style.background = "#d32f66";
+} 
+                
+           
+      
 let displayTotal = 0;
 
 cart.forEach(function(item) {
