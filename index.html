@@ -248,7 +248,14 @@ document.querySelectorAll(".flower").forEach(function(flower) {
                 quantity: qty
             });
         }
+let displayTotal = 0;
 
+cart.forEach(function(item) {
+    displayTotal += item.price * item.quantity;
+});
+
+document.getElementById("totalAmount").innerText =
+    "Total Amount: ₹" + displayTotal;
         button.innerText = "Added ✓";
         button.style.background = "#25D366";
     });
