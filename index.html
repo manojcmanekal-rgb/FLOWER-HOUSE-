@@ -488,6 +488,22 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.17.1/firebas
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+    const db = getFirestore(app);
+
+const flowerSnapshot = await getDocs(collection(db, "flowers"));
+
+const flowerCards = document.querySelectorAll(".flower h3");
+
+let i = 0;
+
+flowerSnapshot.forEach(function(doc) {
+    const data = doc.data();
+
+    if (flowerCards[i] && data.name) {
+        flowerCards[i].innerText = data.name;
+        i++;
+    }
+});
 </script>
 </body>
 </html>
