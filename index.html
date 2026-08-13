@@ -438,6 +438,14 @@ function setLanguage(lang) {
 } 
 } 
 </script>
+  <script>
+document.querySelectorAll("button[onclick]").forEach(function(button) {
+    button.addEventListener("click", function() {
+        const lang = this.getAttribute("onclick").match(/'([^']+)'/)[1];
+        setLanguage(lang);
+    });
+});
+</script>
 </body>
 </html>
 
