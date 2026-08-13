@@ -345,6 +345,15 @@ document.getElementById("orderButton").addEventListener("click", function(e) {
         "https://wa.me/916362993413?text=" +
         encodeURIComponent(message);
 });
+  function setLanguage(lang) {
+    if (lang === "kn") {
+        alert("ಕನ್ನಡ ಭಾಷೆ ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ");
+    } else if (lang === "en") {
+        alert("English language selected");
+    } else if (lang === "hi") {
+        alert("हिंदी भाषा चुनी गई");
+    }
+}
 </script>
 </body>
 </html>
