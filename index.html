@@ -227,7 +227,7 @@ document.querySelectorAll(".flower").forEach(function(flower) {
     quantityBox.querySelector(".minus").addEventListener("click", function() {
         let q = parseInt(quantity.innerText);
         if (q > 1) {
-            quantity.innerText = q - 1;
+            quantity.innerText = q - 0;
         }
     });
 
