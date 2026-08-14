@@ -176,4 +176,15 @@ async function loadFlowers() {
         "<b>" + (data.name || "Flower") + "</b>" +
         "<br>₹" + (data.price || 0);
 
-      list
+      list       list.appendChild(div);
+
+    });
+
+  } catch (error) {
+
+    list.innerText = "Unable to load flowers.";
+
+  }
+}
+
+loadFlowers();
