@@ -492,17 +492,31 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.17.1/firebas
 
 const flowerSnapshot = await getDocs(collection(db, "flowers"));
 
-const flowerCards = document.querySelectorAll(".flower h3");
+const flowerCards = document.querySelectorAll(".flower");
 
 let i = 0;
 
 flowerSnapshot.forEach(function(doc) {
     const data = doc.data();
 
-    if (flowerCards[i] && data.name) {
-        flowerCards[i].innerText = data.name;
+    if (flowerCards[i]) {
+
+        const nameElement = flowerCards[i].querySelector("h3");
+        const priceElement = flowerCards[i].querySelector(".price");
+
+        if (nameElement && data.name) {
+            nameElement.innerText = data.name;
+        }
+
+        if (priceElement && data.price !== undefined) {
+            priceElement.innerText = "₹" + data.price;
+        }
+
         i++;
     }
+});
+        
+    
 });
 </script>
 </body>
