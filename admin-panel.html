@@ -182,7 +182,7 @@ async function loadFlowers() {
 
   } catch (error) {
 
-    list.innerText = "Unable to load flowers.";
+    list.innerText = error.message;
 
   }
 }
