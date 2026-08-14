@@ -99,13 +99,13 @@ window.login = async function() {
     const message = document.getElementById("message");
 
     try {
+    await setPersistence(auth, browserLocalPersistence);
 
-        await signInWithEmailAndPassword(
-            auth,
-            email,
-            password
-        );
-
+    await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+    );
         message.innerText = "Login successful ✅";
 
         setTimeout(function() {
