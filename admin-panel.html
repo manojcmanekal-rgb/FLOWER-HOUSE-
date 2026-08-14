@@ -107,6 +107,9 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
+import { getAuth }
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyBCOZQu9uFDuQE0sCQUK0t-yFfkaMz57cQ",
@@ -118,7 +121,10 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore(app);
+
+const auth = getAuth(app);
 
 
 window.addFlower = async function() {
@@ -176,7 +182,7 @@ async function loadFlowers() {
         "<b>" + (data.name || "Flower") + "</b>" +
         "<br>₹" + (data.price || 0);
 
-            list.appendChild(div);
+      list.appendChild(div);
 
     });
 
@@ -188,6 +194,7 @@ async function loadFlowers() {
 }
 
 loadFlowers();
+
 </script>
 
 </body>
