@@ -161,38 +161,40 @@ window.addFlower = async function() {
 
 
 async function loadFlowers() {
-
   const list = document.getElementById("flowerList");
 
-  try {
+  list.innerHTML = "Loading...";
 
-    const snapshot = await getDocs(collection(db, "flowers"));
+  try {
+    const snapshot = await getDocs(
+      collection(db, "flowers")
+    );
 
     list.innerHTML = "";
 
-    snapshot.forEach(function(doc) {
+    if (snapshot.empty) {
+      list.innerHTML = "No flowers added yet 🌸";
+      return;
+    }
 
+    snapshot.forEach(function(doc) {
       const data = doc.data();
 
       const div = document.createElement("div");
-
       div.className = "flower";
 
       div.innerHTML =
-    "<b>" + (data.name || "Flower") + "</b>" +
-    "<br>₹" + (data.price || 0);
+        "<b>" + (data.name || "Flower") + "</b>" +
+        "<br>₹" + (data.price || 0);
 
       list.appendChild(div);
-
     });
 
   } catch (error) {
-
-    list.innerText = error.message;
-
+    list.innerHTML =
+      "Error loading flowers: " + error.message;
   }
 }
-
 loadFlowers();
   
 
