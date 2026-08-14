@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLOWER HOUSE - Admin Panel</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  color: #222;
+}
+
+header {
+  background: white;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 8px #ddd;
+}
+
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 15px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px #ddd;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  margin: 8px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 13px;
+  margin-top: 8px;
+  background: black;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.flower {
+  border-bottom: 1px solid #ddd;
+  padding: 12px 0;
+}
+
+.flower:last-child {
+  border-bottom: none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🌸 FLOWER HOUSE</h1>
+  <p>Admin Panel</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Add Flower</h2>
+
+    <input type="text" id="flowerName" placeholder="Flower name">
+
+    <input type="number" id="flowerPrice" placeholder="Price ₹">
+
+    <button onclick="addFlower()">Add Flower</button>
+
+    <p id="message"></p>
+  </div>
+
+  <div class="card">
+    <h2>Flowers</h2>
+    <div id="flowerList">Loading...</div>
+  </div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBCOZQu9uFDuQE0sCQUK0t-yFfkaMz57cQ",
+  authDomain: "flower-house-53227.firebaseapp.com",
+  projectId: "flower-house-53227",
+  storageBucket: "flower-house-53227.firebasestorage.app",
+  messagingSenderId: "434415503843",
+  appId: "1:434415503843:web:cbbf2fd16dabc70812f8d6"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+
+window.addFlower = async function() {
+
+  const name = document.getElementById("flowerName").value;
+  const price = document.getElementById("flowerPrice").value;
+  const message = document.getElementById("message");
+
+  if (!name || !price) {
+    message.innerText = "Please enter flower name and price.";
+    return;
+  }
+
+  try {
+
+    await addDoc(collection(db, "flowers"), {
+      name: name,
+      price: Number(price)
+    });
+
+    message.innerText = "Flower added successfully ✅";
+
+    document.getElementById("flowerName").value = "";
+    document.getElementById("flowerPrice").value = "";
+
+    loadFlowers();
+
+  } catch (error) {
+
+    message.innerText = "Error: " + error.message;
+
+  }
+};
+
+
+async function loadFlowers() {
+
+  const list = document.getElementById("flowerList");
+
+  try {
+
+    const snapshot = await getDocs(collection(db, "flowers"));
+
+    list.innerHTML = "";
+
+    snapshot.forEach(function(doc) {
+
+      const data = doc.data();
+
+      const div = document.createElement("div");
+
+      div.className = "flower";
+
+      div.innerHTML =
+        "<b>" + (data.name || "Flower") + "</b>" +
+        "<br>₹" + (data.price || 0);
+
+      list
