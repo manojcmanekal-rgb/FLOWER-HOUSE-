@@ -100,19 +100,16 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
 
 import {
-    getFirestore,
-    collection,
-    addDoc,
-    getDocs,
-    updateDoc,
-    doc
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs
 }
-import { getAuth, onAuthStateChanged, setPersistence, browserLocalPersistence }
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBCOZQu9uFDuQE0sCQUK0t-yFfkaMz57cQ",
+  apiKey: "AIzaSyBC0ZQ9uFDuQE0sCQUK0t-yFfkaMz57cQ",
   authDomain: "flower-house-53227.firebaseapp.com",
   projectId: "flower-house-53227",
   storageBucket: "flower-house-53227.firebasestorage.app",
@@ -120,17 +117,15 @@ const firebaseConfig = {
   appId: "1:434415503843:web:cbbf2fd16dabc70812f8d6"
 };
 
-const app = initializeApp(firebaseConfig);
 
+const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const auth = getAuth(app);
-setPersistence(auth, browserLocalPersistence);
 
-window.addFlower = async function() {
+window.addFlower = async function () {
 
-  const name = document.getElementById("flowerName").value;
-  const price = document.getElementById("flowerPrice").value;
+  const name = document.getElementById("flowerName").value.trim();
+  const price = document.getElementById("flowerPrice").value.trim();
   const message = document.getElementById("message");
 
   if (!name || !price) {
@@ -157,15 +152,18 @@ window.addFlower = async function() {
     message.innerText = "Error: " + error.message;
 
   }
+
 };
 
 
 async function loadFlowers() {
+
   const list = document.getElementById("flowerList");
 
   list.innerHTML = "Loading...";
 
   try {
+
     const snapshot = await getDocs(
       collection(db, "flowers")
     );
@@ -178,9 +176,11 @@ async function loadFlowers() {
     }
 
     snapshot.forEach(function(doc) {
+
       const data = doc.data();
 
       const div = document.createElement("div");
+
       div.className = "flower";
 
       div.innerHTML =
@@ -188,16 +188,22 @@ async function loadFlowers() {
         "<br>₹" + (data.price || 0);
 
       list.appendChild(div);
+
     });
 
   } catch (error) {
+
     list.innerHTML =
       "Error loading flowers: " + error.message;
-  }
-}
-loadFlowers();
-  
 
+  }
+
+}
+
+
+loadFlowers();
+
+</script>
 </script>
 
 </body>
