@@ -466,58 +466,51 @@ function setLanguage(lang) {
 }    
 </script>
   <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-analytics.js";
- 
-  
-  // https://firebase.google.com/docs/web/setup#available-libraries
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+import { getFirestore, collection, getDocs }
+from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBCOZQu9uFDuQE0SqCUKOt-yFfkaMz57cQ",
-    authDomain: "flower-house-53227.firebaseapp.com",
-    projectId: "flower-house-53227",
-    storageBucket: "flower-house-53227.firebasestorage.app",
-    messagingSenderId: "434415503843",
-    appId: "1:434415503843:web:cbbf2fd16dabc70812f8d6",
-    measurementId: "G-7FHK8CN61R"
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyBCOZQu9uFDuQE0sCQUK0t-yFfkaMz57cQ",
+  authDomain: "flower-house-53227.firebaseapp.com",
+  projectId: "flower-house-53227",
+  storageBucket: "flower-house-53227.firebasestorage.app",
+  messagingSenderId: "434415503843",
+  appId: "1:434415503843:web:cbbf2fd16dabc70812f8d6"
+};
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-    const db = getFirestore(app);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-const flowerSnapshot = await getDocs(collection(db, "flowers"));
+async function loadFlowers() {
+  const flowerCards = document.querySelectorAll(".flower");
 
-const flowerCards = document.querySelectorAll(".flower");
+  try {
+    const snapshot = await getDocs(collection(db, "flowers"));
 
-let i = 0;
+    snapshot.forEach((doc, index) => {
+      if (!flowerCards[index]) return;
 
-flowerSnapshot.forEach(function(doc) {
-    const data = doc.data();
+      const data = doc.data();
 
-    if (flowerCards[i]) {
+      const nameElement = flowerCards[index].querySelector("h3");
+      const priceElement = flowerCards[index].querySelector(".price");
 
-        const nameElement = flowerCards[i].querySelector("h3");
-        const priceElement = flowerCards[i].querySelector(".price");
+      if (nameElement && data.name) {
+        nameElement.innerText = data.name;
+      }
 
-        if (nameElement && data.name) {
-            nameElement.innerText = data.name;
-        }
+      if (priceElement && data.price !== undefined) {
+        priceElement.innerText = "₹" + data.price;
+      }
+    });
 
-        if (priceElement && data.price !== undefined) {
-            priceElement.innerText = "₹" + data.price;
-        }
+  } catch (error) {
+    console.error("Firebase error:", error);
+  }
+}
 
-        i++;
-    }
-});
-        
-    
-    
+loadFlowers();
 </script>
 </body>
 </html>
