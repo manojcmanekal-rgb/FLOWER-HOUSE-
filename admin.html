@@ -67,59 +67,42 @@ button {
     <div id="message"></div>
 </div>
 
-<script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+<script src="https://www.gstatic.com/firebasejs/12.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/12.7.1/firebase-auth-compat.js"></script>
 
-import {
-    getAuth,
-    signInWithEmailAndPassword,
-    setPersistence,
-    browserLocalPersistence
-}
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+<script>
 const firebaseConfig = {
-  apiKey: "AIzaSyBCOZQu9uFDuQE0SqCUKOt-yFfkaMz57cQ",
+  apiKey: "AIzaSyBCOZQu9uFDuQE0SqCUK0t-yFfkaMz57cQ",
   authDomain: "flower-house-53227.firebaseapp.com",
   projectId: "flower-house-53227",
   storageBucket: "flower-house-53227.firebasestorage.app",
   messagingSenderId: "434415503843",
-  appId: "1:434415503843:web:cbbf2fd16dabc70812f8d6",
-  measurementId: "G-7FHK8CN61R"
+  appId: "1:434415503843:web:cbbf2fd16dabc70812f8d6"
 };
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 
-window.login = async function() {
+firebase.initializeApp(firebaseConfig);
 
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const message = document.getElementById("message");
+document.getElementById("loginBtn").addEventListener("click", async function() {
 
-    try {
-    await setPersistence(auth, browserLocalPersistence);
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const message = document.getElementById("message");
 
-    await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-    );
-        message.innerText = "Login successful ✅";
+  try {
+    await firebase.auth().signInWithEmailAndPassword(email, password);
 
-        setTimeout(function() {
-            window.location.href = "admin-panel.html";
-        }, 1000);
+    message.innerText = "Login successful ✅";
 
-    } catch (error) {
+    setTimeout(function() {
+      window.location.href = "admin-panel.html";
+    }, 1000);
+
+  } catch (error) {
     message.innerText = error.code + " ❌";
-}
+  }
 
-       
-    
-};
-
-
+});
 </script>
 
 </body>
