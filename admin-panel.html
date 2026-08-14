@@ -193,7 +193,13 @@ async function loadFlowers() {
   }
 }
 
-loadFlowers();
+onAuthStateChanged(auth, function(user) {
+  if (user) {
+    loadFlowers();
+  } else {
+    window.location.href = "admin.html";
+  }
+});
 
 </script>
 
