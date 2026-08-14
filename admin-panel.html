@@ -156,7 +156,17 @@ window.addFlower = async function () {
   }
 
 };
+async function deleteFlower(id) {
+    if (!confirm("Delete this flower?")) return;
 
+    try {
+        await deleteDoc(doc(db, "flowers", id));
+        alert("Flower deleted successfully ✅");
+        loadFlowers();
+    } catch (error) {
+        alert("Delete error: " + error.message);
+    }
+}
 
 
   async function loadFlowers() {
